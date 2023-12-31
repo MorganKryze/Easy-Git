@@ -13,30 +13,30 @@ eg-help() {
 
     echo -e "The ${RED}red${RESET} text indicates the required arguments for each function."
     echo -e "The ${ORANGE}orange${RESET} text indicates the optional arguments for each function.\n"
-    echo -e "Available functions:"
+    echo -e "Available functions:\n"
 
     for func in eg-setup eg-worktree eg-rebase eg-emojis; do
-        echo -e "${BLUE}$func:${RESET}"
+        echo -e "  ${BLUE}$func:${RESET}"
         case "$func" in
             "eg-setup")
-                echo -e "  Clone a repository, add the emojis and create a worktree.\n"
-                echo -e "  Usage: ${GREEN}eg-setup${RESET} ${RED}<repo_url>${RESET} ${ORANGE}<branch_name>${RESET}"
-                echo -e "    ${RED}repo_url:${RESET} The HTTPS or SSH link of the repository to clone."
-                echo -e "    ${ORANGE}branch_name:${RESET} [OPTIONAL] The name of the branch to create a worktree for."
+                echo -e "    Clone a repository, add the emojis and create a worktree.\n"
+                echo -e "    Usage: ${GREEN}eg-setup${RESET} ${RED}<repo_url>${RESET} ${ORANGE}<branch_name>${RESET}"
+                echo -e "      ${RED}repo_url:${RESET} The HTTPS or SSH link of the repository to clone."
+                echo -e "      ${ORANGE}branch_name:${RESET} [OPTIONAL] The name of the branch to create a worktree for."
                 ;;
             "eg-worktree")
-                echo -e "  Create a new worktree for a branch.\n"
-                echo -e "  Usage: ${GREEN}eg-worktree${RESET} ${RED}<branch_name>${RESET}"
-                echo -e "    ${RED}branch_name:${RESET} The name of the branch to create a worktree for."
+                echo -e "    Create a new worktree for a branch.\n"
+                echo -e "    Usage: ${GREEN}eg-worktree${RESET} ${RED}<branch_name>${RESET}"
+                echo -e "      ${RED}branch_name:${RESET} The name of the branch to create a worktree for."
                 ;;
             "eg-rebase")
-                echo -e "  Rebase the current branch on another branch.\n"
-                echo -e "  Usage: ${GREEN}eg-rebase${RESET} ${RED}<branch_name>${RESET}"
-                echo -e "    ${RED}branch_name:${RESET} The name of the branch to rebase on."
+                echo -e "    Rebase the current branch on another branch.\n"
+                echo -e "    Usage: ${GREEN}eg-rebase${RESET} ${RED}<branch_name>${RESET}"
+                echo -e "      ${RED}branch_name:${RESET} The name of the branch to rebase on."
                 ;;
             "eg-emojis")
-                echo -e "  Add emojis to .git/hooks/ directory.\n"
-                echo -e "  Usage: ${GREEN}eg-emojis${RESET}"
+                echo -e "    Add emojis to .git/hooks/ directory.\n"
+                echo -e "    Usage: ${GREEN}eg-emojis${RESET}"
                 ;;
             *)
                 echo -e "  ${RED}No help text available.${RESET}"
