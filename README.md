@@ -2,7 +2,7 @@
 
 > Easy Git is a simple tool to help you set up and use your git workspaces.
 
-![Easy Git](src/img/demo.png)
+![Easy Git](src/assets/img/demo.png)
 
 ## Getting Started
 
