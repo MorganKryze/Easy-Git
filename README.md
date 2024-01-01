@@ -10,6 +10,7 @@
 
 - [Git](https://git-scm.com/downloads)
 - [Git emojis](https://github.com/Buzut/git-emojis-hook) installed at your root folder
+- A terminal on zsh preferably, but check the warning below if you use bash
 
 ### Install
 
@@ -38,6 +39,10 @@ You're all set up! Now, start using Easy Git by running the following command:
 ```sh
 eg-help
 ```
+
+> [!WARNING]
+> The script are written for a zsh, if you want to use it with bash, you will have to change the script slightly:
+> Comment the line 111 and uncomment the line 112. The issue comes from the fact that bash and zsh have different syntax for the read command.
 
 ### Features
 
