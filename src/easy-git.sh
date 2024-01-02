@@ -107,7 +107,7 @@ eg-rebase() {
     git pull
     cd -
 
-    read confirm"?eg: Are you sure you want to continue? [Y/n] " # for zsh
+    read -r confirm"?eg: Are you sure you want to continue? [Y/n] " # for zsh
     #read -p "eg: Are you sure you want to continue? [Y/n] " -n 1 -r confirm # for bash
     if [[ $confirm =~ ^[Yy]$ ]]; then
         git rebase $1
