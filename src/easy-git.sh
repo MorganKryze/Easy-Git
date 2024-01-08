@@ -13,7 +13,7 @@ eg-help() {
     echo -e "The ${ORANGE}orange${RESET} text indicates the optional arguments for each function.\n"
 
     echo -e "Available functions:\n"
-    for func in eg-setup eg-worktree eg-rebase eg-emojis; do
+    for func in eg-setup eg-addworktree eg-rmworktree eg-rebase eg-emojis; do
         echo -e "  ${BLUE}$func:${RESET}"
         case "$func" in
         "eg-setup")
@@ -22,9 +22,19 @@ eg-help() {
             echo -e "      ${RED}repo_url:${RESET} The HTTPS or SSH link of the repository to clone."
             echo -e "      ${ORANGE}branch_name:${RESET} [OPTIONAL] The name of the branch to create a worktree for."
             ;;
-        "eg-worktree")
+        "eg-addworktree")
             echo -e "    Create a new worktree for a branch.\n"
-            echo -e "    Usage: ${GREEN}eg-worktree${RESET} ${RED}<branch_name>${RESET}"
+            echo -e "    Usage: ${GREEN}eg-addworktree${RESET} ${RED}<branch_name>${RESET}"
+            echo -e "      ${RED}branch_name:${RESET} The name of the branch to create a worktree for."
+            ;;
+        "eg-rmworktree")
+            echo -e "    Remove a worktree for a branch.\n"
+            echo -e "    Usage: ${GREEN}eg-rmworktree${RESET} ${RED}<branch_name>${RESET}"
+            echo -e "      ${RED}branch_name:${RESET} The name of the branch to remove a worktree for."
+            ;;
+        "eg-addbranch")
+            echo -e "    Create a branch and a worktree for it.\n"
+            echo -e "    Usage: ${GREEN}eg-addbranch${RESET} ${RED}<branch_name>${RESET}"
             echo -e "      ${RED}branch_name:${RESET} The name of the branch to create a worktree for."
             ;;
         "eg-rebase")
