@@ -47,9 +47,10 @@ eg-help
 ### Features
 
 - [x] Setup a git workspace (clone, add emojis)
-- [x] Add workspace
-- [x] Rebase after PR merge (fix the 1 commit ahead and behind)
+- [x] Add/ Remove worktree
+- [x] Rebase after PR merge (fix the 1 commit ahead and behind) and allow to stash changes
 - [x] Manually add emojis to a local repository
+- [x] Add brand & worktree to a local repository
 
 ## License
 
