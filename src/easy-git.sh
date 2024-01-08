@@ -211,6 +211,15 @@ eg-rebase() {
         return 1
     fi
 
+    read -r stash"?eg: Is there changes to stash? [Y/n] " # for zsh
+    #read -p "eg: Is there changes to stash? [Y/n] " -n 1 -r stash # for bash
+    if [[ $stash =~ ^[Yy]$ ]]; then
+        echo "eg: 🛠️ Stash current changes 🛠️"
+        git stash
+    else
+        echo "eg: 🛠️ No stash required 🛠️"
+    fi
+
     echo "eg: 🛠️ Pulling latest commits on $1 🛠️"
     cd ../$1
     git pull
@@ -223,6 +232,13 @@ eg-rebase() {
         git rebase $1
         git push -f
         echo "eg: 🎉 Successfully rebased this branch on $1 🎉"
+        if [[ $stash =~ ^[Yy]$ ]]; then
+            echo "eg: 🛠️ Apply stash saved 🛠️"
+            git stash apply
+            echo "eg: 🛠️ Drop stash saved 🛠️"
+            git stash drop
+            echo "eg: 🎉 Successfully applied stash saved 🎉"
+        fi
         return 0
     else
         echo "eg: ❌ Operation aborted. ❌"
