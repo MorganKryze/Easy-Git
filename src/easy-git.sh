@@ -7,13 +7,10 @@ eg-help() {
 
     echo -e "\nWelcome to the Easy Git Helper!\n"
 
-    echo -e "Here are all the easy-git functions created to help you set up  and use your git workspace easier.\n"
-
-    echo -e "The ${RED}red${RESET} text indicates the required arguments for each function."
-    echo -e "The ${ORANGE}orange${RESET} text indicates the optional arguments for each function.\n"
+    echo -e "Here are all the easy-git functions created to help you set up and use your git workspace easier.\n"
 
     echo -e "Available functions:\n"
-    for func in eg-setup eg-addworktree eg-rmworktree eg-rebase eg-emojis; do
+    for func in eg-setup eg-addworktree eg-rmworktree eg-addbranch eg-rebase eg-emojis; do
         echo -e "  ${BLUE}$func:${RESET}"
         case "$func" in
         "eg-setup")
