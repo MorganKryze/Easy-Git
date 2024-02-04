@@ -69,7 +69,7 @@ eg-setup() {
     git clone "$1" main && cd main
 
     echo "eg: 🛠️ Adding the emojis hooks 🛠️"
-    cp ~/.gitemojis/* .git/hooks/
+    cp ~/Easy-Git/src/assets/gitemojis/* .git/hooks/
 
     if [ -z "$2" ]; then
         echo "eg: No branch name provided for worktree. No worktree created."
@@ -256,7 +256,8 @@ eg-emojis() {
         return 1
     fi
     echo "eg: 🛠️ Adding emojis to .git/hooks/ 🛠️"
-    cp ~/.gitemojis/* .git/hooks/
+    cp ~/Easy-Git/src/assets/gitemojis/* .git/hooks/
+    
     echo "eg: 🎉 Successfully added emojis to: .git/hooks/ 🎉"
     return 0
 }

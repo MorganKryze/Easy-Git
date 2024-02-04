@@ -13,7 +13,13 @@
 
 ### Install
 
-To install Easy Git, run the following command at the same level as your .bashrc or .zshrc file:
+Get to the root directory of your terminal (command for macOS):
+
+```sh
+cd ~
+```
+
+To install Easy Git, run the following command (at the same level as your .bashrc or .zshrc file):
 
 ```sh
 git clone https://github.com/MorganKryze/Easy-Git.git
