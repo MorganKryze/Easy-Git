@@ -16,10 +16,10 @@ eg-help() {
         echo -e "  ${BLUE}$func:${RESET}"
         case "$func" in
         "eg-setup")
-            echo -e "    Clone a repository, add the emojis and create a worktree.\n"
+            echo -e "    Clone a repository, add the emojis and create worktrees.\n"
             echo -e "    Usage: ${GREEN}eg-setup${RESET} ${RED}<repo_url>${RESET} ${ORANGE}<branch_name>${RESET}"
             echo -e "      ${RED}repo_url:${RESET} The HTTPS or SSH link of the repository to clone."
-            echo -e "      ${ORANGE}branch_name:${RESET} [OPTIONAL] The name of the branch to create a worktree for."
+            echo -e "      ${ORANGE}branch_name:${RESET} [OPTIONAL] The name of the branch to create a worktree for. You can add as many as you want."
             ;;
         "eg-addworktree")
             echo -e "    Create a new worktree for a branch.\n"
@@ -71,14 +71,18 @@ eg-setup() {
     echo "eg: 🛠️ Adding the emojis hooks 🛠️"
     cp ~/Easy-Git/src/assets/gitemojis/* .git/hooks/
 
-    if [ -z "$2" ]; then
-        echo "eg: No branch name provided for worktree. No worktree created."
-        return 1
+    shift
+
+    if [ $# -eq 0 ]; then
+        echo "eg: No branch names provided for worktree. No worktree created."
+        echo "eg: 🎉 Successfully cloned and set up: $repo_name! 🎉"
+        return 0
     else
-        echo "eg: 🛠️ Creating the worktree 🛠️"
-        git worktree add ../$2 $2
-        cd ../$2
-        echo "eg: 🎉 Successfully cloned and set up: $repo_name 🎉"
+        for branch_name in "$@"; do
+            echo "eg: 🛠️ Creating the worktree for branch: $branch_name 🛠️"
+            git worktree add ../$branch_name $branch_name
+        done
+            echo "eg: 🎉 Successfully cloned and set up: $repo_name! 🎉"
         return 0
     fi
 }
