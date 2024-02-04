@@ -1,3 +1,5 @@
+#!/bin/sh
+
 eg-help() {
     GREEN='\033[0;32m'
     BLUE='\033[0;34m'
