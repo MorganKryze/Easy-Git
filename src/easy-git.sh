@@ -60,6 +60,9 @@ eg-setup() {
     fi
     repo_name=$(basename -s .git "$1")
 
+    echo "eg: 🛠️ Creating project's folder 🛠️"
+    mkdir -p "$repo_name" && cd "$repo_name"
+
     echo "eg: 🛠️ Cloning the project 🛠️"
     git clone "$1" main && cd main
 
