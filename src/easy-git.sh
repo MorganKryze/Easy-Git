@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/bin/zsh
 
 # === Default Helper ===
+
 git-help() {
     GREEN='\033[0;32m'
     BLUE='\033[0;34m'
@@ -13,7 +14,7 @@ git-help() {
     echo -e "Here are all the easy-git functions created to help you set up and use your git workspace easier.\n"
 
     echo -e "Available functions:\n"
-    for func in git-setup git-addworktree git-rmworktree git-addbranch git-rebase git-emojis; do
+    for func in git-setup git-addworktree git-rmworktree git-addbranch git-rebase git-emojis git-update; do
         echo -e "  ${BLUE}$func:${RESET}"
         case "$func" in
         "git-setup")
@@ -46,6 +47,9 @@ git-help() {
             echo -e "    Add emojis to .git/hooks/ directory.\n"
             echo -e "    Usage: ${GREEN}git-emojis${RESET}"
             ;;
+        "git-update")
+            echo -e "    Update Easy-Git.\n"
+            ;;
         *)
             echo -e "  ${RED}No help text available.${RESET}"
             ;;
@@ -57,6 +61,8 @@ git-help() {
 # === Clone a repository, add the emojis to the hooks directory and [optionally] create a worktree for a branch  ===
 
 git-setup() {
+    verify_git || return 1
+
     if [ -z "$1" ]; then
         echo "git: Please provide a repository URL."
         echo "git: ❌ Operation aborted. ❌"
@@ -84,7 +90,7 @@ git-setup() {
             echo "git: 🛠️ Creating the worktree for branch: $branch_name 🛠️"
             git worktree add ../$branch_name $branch_name
         done
-            echo "git: 🎉 Successfully cloned and set up: $repo_name! 🎉"
+        echo "git: 🎉 Successfully cloned and set up: $repo_name! 🎉"
         return 0
     fi
 }
@@ -92,6 +98,8 @@ git-setup() {
 # === Create a worktree for a branch ===
 
 git-addworktree() {
+    verify_git || return 1
+
     if [ -z "$1" ]; then
         echo "git: Please provide a branch name."
         echo "git: ❌ Operation aborted. ❌"
@@ -119,9 +127,35 @@ git-addworktree() {
     fi
 }
 
+# === Update Git and Pull the Repository ===
+
+git-update() {
+    verify_git || return 1
+
+    local repo_path="$EASY_GIT_PATH"
+
+    if [ ! -d "$repo_path/.git" ]; then
+        echo "git: Repository directory not found or not a Git repository."
+        echo "git: ❌ Operation aborted. ❌"
+        return 1
+    fi
+
+    cd "$repo_path"
+
+    echo "git: 🛠️ Pulling latest changes 🛠️"
+    git pull origin main
+
+    cd -
+
+    echo "git: 🎉 Successfully updated Easy-Git! 🎉"
+    return 0
+}
+
 # === Remove a worktree for a branch ===
 
 git-rmworktree() {
+    verify_git || return 1
+
     if [ -z "$1" ]; then
         echo "git: Please provide a branch name."
         echo "git: ❌ Operation aborted. ❌"
@@ -149,6 +183,8 @@ git-rmworktree() {
 # === Create a branch and a worktree for it ===
 
 git-addbranch() {
+    verify_git || return 1
+
     if [ -z "$1" ]; then
         echo "git: Please provide a branch name."
         echo "git: ❌ Operation aborted. ❌"
@@ -173,26 +209,26 @@ git-addbranch() {
     #read -p "git: Enter your choice: " choice -n 1 -r confirm # for bash
 
     case $choice in
-        1)
-            branch_name="feature-$1"
-            ;;
-        2)
-            branch_name="docs-$1"
-            ;;
-        3)
-            branch_name="test-$1"
-            ;;
-        4)
-            branch_name="fix-$1"
-            ;;
-        5)
-            branch_name="general-$1"
-            ;;
-        *)
-            echo "git: Invalid choice. Please try again." 
-            echo "git: ❌ Operation aborted. ❌"
-            return 1
-            ;;
+    1)
+        branch_name="feature-$1"
+        ;;
+    2)
+        branch_name="docs-$1"
+        ;;
+    3)
+        branch_name="test-$1"
+        ;;
+    4)
+        branch_name="fix-$1"
+        ;;
+    5)
+        branch_name="general-$1"
+        ;;
+    *)
+        echo "git: Invalid choice. Please try again."
+        echo "git: ❌ Operation aborted. ❌"
+        return 1
+        ;;
     esac
 
     echo "git: 🛠️ Creating the branch 🛠️"
@@ -212,6 +248,8 @@ git-addbranch() {
 # === Rebase the current branch on another branch ===
 
 git-rebase() {
+    verify_git || return 1
+
     if [ -z "$1" ]; then
         echo -e "git: Please provide a branch name."
         echo -e "git: ❌ Operation aborted. ❌"
@@ -261,6 +299,8 @@ git-rebase() {
 # === Add emojis to .git/hooks/ directory ===
 
 git-emojis() {
+    verify_git || return 1
+
     if [ ! -d ".git/hooks/" ]; then
         echo -e "git:  .git directory not found."
         echo -e "git: ❌ Operation aborted. ❌"
@@ -268,7 +308,17 @@ git-emojis() {
     fi
     echo "git: 🛠️ Adding emojis to .git/hooks/ 🛠️"
     cp ~/Easy-Git/src/assets/gitemojis/* .git/hooks/
-    
+
     echo "git: 🎉 Successfully added emojis to: .git/hooks/ 🎉"
     return 0
+}
+
+# === Check if Git is installed ===
+
+verify_git() {
+    if ! command -v git &>/dev/null; then
+        echo "git-check: Git is not installed. Please install Git to use this script."
+        echo "git-check: ❌ Operation aborted. ❌"
+        return 1
+    fi
 }
