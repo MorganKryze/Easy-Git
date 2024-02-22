@@ -77,7 +77,7 @@ git-setup() {
     git clone "$1" main && cd main
 
     echo "git: 🛠️ Adding the emojis hooks 🛠️"
-    cp ~/Easy-Git/src/assets/gitemojis/* .git/hooks/
+    cp $EASY_GIT_PATH/src/assets/gitemojis/* .git/hooks/
 
     shift
 
@@ -307,7 +307,7 @@ git-emojis() {
         return 1
     fi
     echo "git: 🛠️ Adding emojis to .git/hooks/ 🛠️"
-    cp ~/Easy-Git/src/assets/gitemojis/* .git/hooks/
+    cp $EASY_GIT_PATH/src/assets/gitemojis/* .git/hooks/
 
     echo "git: 🎉 Successfully added emojis to: .git/hooks/ 🎉"
     return 0
